@@ -1,6 +1,7 @@
 import emojiRegex from "emoji-regex";
 import { z } from "zod";
 import { IconLibrary } from "@shared/utils/IconLibrary";
+import { UrlHelper } from "@shared/utils/UrlHelper";
 
 export function zodEnumFromObjectKeys<
   TI extends Record<string, any>,
@@ -9,6 +10,12 @@ export function zodEnumFromObjectKeys<
   const [firstKey, ...otherKeys] = Object.keys(input) as [R, ...R[]];
   return z.enum([firstKey, ...otherKeys]);
 }
+
+export const zodIdType = () =>
+  z.union([
+    z.string().regex(UrlHelper.SLUG_URL_REGEX, "Must be a valid UUID or slug"),
+    z.string().uuid(),
+  ]);
 
 export const zodIconType = () =>
   z.union([

@@ -5,7 +5,7 @@ import { z } from "zod";
 import { DocumentPermission, StatusFilter } from "@shared/types";
 import { UrlHelper } from "@shared/utils/UrlHelper";
 import { BaseSchema } from "@server/routes/api/schema";
-import { zodIconType } from "@server/utils/zod";
+import { zodIconType, zodIdType } from "@server/utils/zod";
 import { ValidateColor } from "@server/validation";
 
 const DocumentsSortParamsSchema = z.object({
@@ -64,7 +64,7 @@ const BaseSearchSchema = DateFilterSchema.extend({
 
 const BaseIdSchema = z.object({
   /** Id of the document to be updated */
-  id: z.string(),
+  id: zodIdType(),
 });
 
 export const DocumentsListSchema = BaseSchema.extend({
